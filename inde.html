@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graduación | TS Sistemas Informáticos</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-glow: #00ff88;
+            --secondary-glow: #00b8ff;
+            --bg-color: #0d1117;
+            --terminal-gray: #30363d;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: #ffffff;
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            margin: 0;
+        }
+
+        /* Red de Nodos de Fondo (Particles.js) */
+        #particles-js {
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            background: radial-gradient(circle at center, #1a2332 0%, var(--bg-color) 100%);
+        }
+
+        /* Estilo tipo Consola/Código */
+        .code-font {
+            font-family: 'Fira Code', monospace;
+            color: var(--primary-glow);
+        }
+
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+        .delay-4 { animation-delay: 0.8s; }
+
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Nombre Neón */
+        .name-neon {
+            font-size: clamp(2rem, 7vw, 3.5rem);
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: #fff;
+            text-shadow: 0 0 10px var(--secondary-glow), 0 0 20px var(--secondary-glow), 0 0 40px var(--secondary-glow);
+            margin: 10px 0;
+        }
+
+        /* Contenedor Glassmorphism */
+        .glass-panel {
+            background: rgba(22, 27, 34, 0.6);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .invitation-container {
+            position: relative;
+            padding: 2rem;
+            border-left: 5px solid var(--primary-glow);
+        }
+
+        .terminal-header {
+            background: var(--terminal-gray);
+            padding: 5px 15px;
+            border-radius: 10px 10px 0 0;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.8rem;
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .dot { width: 10px; height: 10px; border-radius: 50%; }
+        .dot-red { background: #ff5f56; }
+        .dot-yellow { background: #ffbd2e; }
+        .dot-green { background: #27c93f; }
+
+        /* Tarjetas 3D */
+        .info-card {
+            padding: 2rem;
+            text-align: center;
+            transform-style: preserve-3d;
+            height: 100%;
+            display: block;
+            text-decoration: none;
+            color: inherit;
+            transition: border-color 0.3s ease;
+        }
+
+        .info-card:hover {
+            border-color: var(--secondary-glow);
+            color: white;
+        }
+
+        .info-icon {
+            font-size: 3rem;
+            color: var(--primary-glow);
+            margin-bottom: 1rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateZ(30px); }
+            50% { transform: translateY(-15px) translateZ(30px); }
+        }
+
+        /* Botón Estilo Ejecución */
+        .btn-execute {
+            background: rgba(0, 255, 136, 0.1);
+            color: var(--primary-glow);
+            border: 2px solid var(--primary-glow);
+            padding: 15px 45px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-family: 'Fira Code', monospace;
+            font-weight: 700;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: pulseGlow 2s infinite;
+        }
+
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 0 0 rgba(0, 255, 136, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(0, 255, 136, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 255, 136, 0); }
+        }
+
+        .btn-execute:hover {
+            background: var(--primary-glow);
+            color: #000;
+            box-shadow: 0 0 40px var(--primary-glow);
+            transform: scale(1.1);
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 10px; height: 1.2em;
+            background: var(--primary-glow);
+            margin-left: 5px;
+            animation: blink 1s step-end infinite;
+        }
+        @keyframes blink { 50% { opacity: 0; } }
+
+        #console-log { font-size: 0.85rem; color: #8b949e; }
+    </style>
+</head>
+<body>
+
+    <div id="particles-js"></div>
+
+    <div class="container py-5">
+        <div class="text-center mb-5">
+            <p class="code-font mb-2 fade-in-up">~ /home/graduado/init_celebration.sh</p>
+            <h1 class="display-4 fw-bold fade-in-up delay-1">
+                <span id="typewriter"></span><span class="cursor"></span>
+            </h1>
+            
+            <div class="name-neon fade-in-up delay-2">RUBEN ARTEMIO CAMARGO S.</div>
+            
+            <p class="lead text-secondary fade-in-up delay-2">Técnico Superior en Sistemas Informáticos</p>
+        </div>
+
+        <div class="row justify-content-center mb-5 fade-in-up delay-3">
+            <div class="col-md-10 col-lg-9">
+                <div class="terminal-header">
+                    <div class="dot dot-red"></div>
+                    <div class="dot dot-yellow"></div>
+                    <div class="dot dot-green"></div>
+                    <span class="ms-2 text-secondary">invitation_message.txt</span>
+                </div>
+                <div class="glass-panel invitation-container">
+                    <p id="console-log" class="code-font mb-3">> console.log("Cargando Invitación...");</p>
+                    <p class="fs-5 mb-0 text-white" style="line-height: 1.8;">
+                        Ha sido un largo camino lleno de esfuerzo, dedicación y momentos inolvidables. Hoy por fin culmina esta hermosa etapa y me hace muchísima ilusión invitarte a celebrar conmigo este gran logro. Tu presencia y apoyo constante han sido fundamentales, y contar contigo será el mejor regalo para hacer de este día algo verdaderamente especial. ¡Acompáñame en mi Acto de Colación!
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-4 justify-content-center mb-5 fade-in-up delay-4">
+            <div class="col-md-5">
+                <div class="glass-panel info-card" data-tilt>
+                    <i class="fas fa-terminal info-icon"></i>
+                    <h3 class="h5 code-font">DATE_TIME</h3>
+                    <p class="fs-3 fw-bold mb-0">Viernes | 17:00</p>
+                </div>
+            </div>
+            
+            <div class="col-md-5">
+                <a href="https://maps.app.goo.gl/d32PAWxC9ezND88y8" target="_blank" class="glass-panel info-card" data-tilt>
+                    <i class="fas fa-map-location-dot info-icon"></i>
+                    <h3 class="h5 code-font">LOCATION</h3>
+                    <p class="fs-3 fw-bold mb-0">La Sombrerería</p>
+                    <small class="code-font" style="font-size: 0.7rem; opacity: 0.7;">[ click para abrir mapa ]</small>
+                </a>
+            </div>
+        </div>
+
+        <div class="text-center fade-in-up delay-4">
+            <button id="cta-button" class="btn btn-execute">
+                <i class="fas fa-satellite-dish me-2"></i> Transmitir Asistencia
+            </button>
+            <p id="status-out" class="code-font mt-3" style="display:none; font-size: 0.9rem;">
+                [STATUS] Redirigiendo a Google Calendar...
+            </p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+
+    <script>
+        // 1. Partículas de Fondo
+        particlesJS("particles-js", {
+            "particles": {
+                "number": { "value": 70, "density": { "enable": true, "value_area": 800 } },
+                "color": { "value": "#00ff88" },
+                "shape": { "type": "circle" },
+                "opacity": { "value": 0.4 },
+                "size": { "value": 3, "random": true },
+                "line_linked": { "enable": true, "distance": 150, "color": "#00b8ff", "opacity": 0.3, "width": 1 },
+                "move": { "enable": true, "speed": 2 }
+            },
+            "interactivity": {
+                "events": { "onhover": { "enable": true, "mode": "grab" }, "onclick": { "enable": true, "mode": "push" } }
+            }
+        });
+
+        // 2. Efecto Typewriter
+        const text = "Invitación a mi Acto de Colación";
+        const target = document.getElementById("typewriter");
+        let i = 0;
+        function type() {
+            if (i < text.length) {
+                target.innerHTML += text.charAt(i);
+                i++;
+                setTimeout(type, 100);
+            }
+        }
+        setTimeout(type, 1000);
+
+        // 3. Botón + Confeti + Redirección
+        document.getElementById('cta-button').addEventListener('click', function() {
+            const status = document.getElementById('status-out');
+            this.innerHTML = '<i class="fas fa-check-circle me-2"></i> [200 OK]';
+            this.style.background = 'var(--primary-glow)';
+            this.style.color = '#000';
+            status.style.display = 'block';
+
+            // Confeti
+            var end = Date.now() + (2 * 1000);
+            (function frame() {
+                confetti({ particleCount: 5, angle: 60, spread: 55, origin: { x: 0 }, colors: ['#00ff88', '#00b8ff'] });
+                confetti({ particleCount: 5, angle: 120, spread: 55, origin: { x: 1 }, colors: ['#00ff88', '#00b8ff'] });
+                if (Date.now() < end) requestAnimationFrame(frame);
+            }());
+
+            // Redirección tras 2.2 segundos
+            setTimeout(() => {
+                window.location.href = "https://calendar.app.google/ALMp2fadfw7WYjaZ9";
+            }, 2200);
+        });
+    </script>
+</body>
+</html>
